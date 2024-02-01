@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+
+    <style>
+        /* Import Font Dancing Script */
+        @import url(https://fonts.googleapis.com/css?family=Dancing+Script);
+
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-color: #e8f5ff;
+            font-family: Arial;
+            overflow: hidden;
+        }
+
+        /* NavbarTop */
+        .navbar-top {
+            background-color: #fff;
+            color: #333;
+            box-shadow: 0px 4px 8px 0px grey;
+            height: 70px;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            padding-top: 15px;
+            position: absolute;
+            left: 45%;
+        }
+
+        .navbar-top ul {
+            float: right;
+            list-style-type: none;
+            margin: 0;
+            overflow: hidden;
+            padding: 18px 50px 0 40px;
+        }
+
+        .navbar-top ul li {
+            float: left;
+        }
+
+        .navbar-top ul li a {
+            color: #333;
+            padding: 14px 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .icon-count {
+            background-color: #ff0000;
+            color: #fff;
+            float: right;
+            font-size: 11px;
+            left: -25px;
+            padding: 2px;
+            position: relative;
+        }
+
+        /* End */
+
+        /* Sidenav */
+        .sidenav {
+            background-color: #fff;
+            color: #333;
+            border-bottom-right-radius: 25px;
+            height: 86%;
+            left: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+            position: absolute;
+            top: 70px;
+            width: 250px;
+        }
+
+        .profile {
+            margin-bottom: 20px;
+            margin-top: -12px;
+            text-align: center;
+        }
+
+        .profile img {
+            border-radius: 50%;
+            box-shadow: 0px 0px 5px 1px grey;
+            width: 100px; /* Adjust the size of the profile photo */
+            height: 100px;
+        }
+
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+            padding-top: 20px;
+        }
+
+        .job {
+            font-size: 16px;
+            font-weight: bold;
+            padding-top: 10px;
+        }
+
+        .url, hr {
+            text-align: center;
+        }
+
+        .url hr {
+            margin-left: 20%;
+            width: 60%;
+        }
+
+        .url a {
+            color: #818181;
+            display: block;
+            font-size: 20px;
+            margin: 10px 0;
+            padding: 6px 8px;
+            text-decoration: none;
+        }
+
+        .url a:hover, .url .active {
+            background-color: #e8f5ff;
+            border-radius: 28px;
+            color: #000;
+            margin-left: 14%;
+            width: 65%;
+        }
+
+        /* End */
+
+        /* Main */
+        .main {
+            margin-top: 2%;
+            margin-left: 29%;
+            font-size: 28px;
+            padding: 0 10px;
+            width: 58%;
+        }
+
+        .main h2 {
+            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .main .card {
+            background-color: #fff;
+            border-radius: 18px;
+            box-shadow: 1px 1px 8px 0 grey;
+            height: auto;
+            margin-bottom: 20px;
+            padding: 20px 0 20px 50px;
+        }
+
+        .main .card table {
+            border: none;
+            font-size: 16px;
+            height: 270px;
+            width: 80%;
+        }
+
+        .edit {
+            position: absolute;
+            color: #e7e7e8;
+            right: 14%;
+        }
+
+        .social-media {
+            text-align: center;
+            width: 90%;
+        }
+
+        .social-media span {
+            margin: 0 10px;
+        }
+
+        .fa-facebook:hover {
+            color: #4267b3 !important;
+        }
+
+        .fa-twitter:hover {
+            color: #1da1f2 !important;
+        }
+
+        .fa-instagram:hover {
+            color: #ce2b94 !important;
+        }
+
+        .fa-invision:hover {
+            color: #f83263 !important;
+        }
+
+        .fa-github:hover {
+            color: #161414 !important;
+        }
+
+        .fa-whatsapp:hover {
+            color: #25d366 !important;
+        }
+
+        .fa-snapchat:hover {
+            color: #fffb01 !important;
+        }
+
+        .edit-mode input {
+            display: inline-block;
+        }
+
+        .edit-mode span {
+            display: none;
+        }
+
+        .view-mode input {
+            display: none;
+        }
+
+        .view-mode span {
+            display: inline-block;
+        }
+
+        /* End */
+    </style>
+
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar top -->
+    <div class="navbar-top">
+        <div class="title">
+            <h1>Profile</h1>
+        </div>
+
+        <!-- Navbar -->
+        <ul>
+            <li>
+                <a href="#message">
+                    <span class="icon-count">29</span>
+                    <i class="fa fa-envelope fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#notification">
+                    <span class="icon-count">59</span>
+                    <i class="fa fa-bell fa-2x"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#sign-out">
+                    <i class="fa fa-sign-out-alt fa-2x"></i>
+                </a>
+            </li>
+        </ul>
+        <!-- End -->
+    </div>
+    <!-- End -->
+
+    <!-- Sidenav -->
+    <div class="sidenav">
+        <div class="profile">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAMAAABC4vDmAAAAYFBMVEX///8AAADv7++urq49PT1BQUHy8vK1tbXT09OXl5f5+fn19fWbm5vZ2dnn5+dFRUXCwsIoKCg4ODhRUVHKysqhoaF1dXUcHBwuLi6RkZFjY2O8vLxXV1cVFRWDg4NqamqMV7lRAAADfElEQVR4nO2biZKqMBBFjRsKgguCgtv//+UjzlPBcQnd94pVk/MBM6cEbjqdTq+HJIqL7RH6F9X0s9QYM+tao0YSlMZyiLo2uRIfR+aHVdcq/4kHK3Ml7drmzDrfmhqbrn2qH2nWMLJ0/fXFp+W9UkWZdGc0DvYPjM6cBnE3SsXwmZJlOT+ux+FnleLjK6Prc8wmn1NKThsXp4pNmo0/ohQ5/Uo3jh+I+N3qvUeTVcB2ytoqWchrdC5xqjKC6VTInKgxP5U6GVOwnGK5kzGkyIqeLisupJxkWGicjNlRpFoHVJMhw0n1RlkYlYMoNutkBClhbt7I8U66b8+yx39//dH7f/uaYR8v9bLSdGHlpbwUWOorX/Q/I/WVOeWl/rbUyEt5KS8lk5p7qU9Jzb2Ul2pKHbRSB7zUQOtkDLpLHKk7CZYcu3EH/E6WAVRK3BZugm0SzzBS2C7/BCOFbREnGCnsmelYHZ2WEficDRMJ4LNSyJs+xTr1AoQUOtJj9dJXLX7oTnr4aAKhJUv48bt631B9fGinXsvj7EfgTyJ3ein8ATcg0/EzMPpMJ5TD+vhER6dFXShQTpGV7WHKyaj2+XHGOJTntZw5r0S10iw5Q3HhSSNVkubOVFsa1rSLqqbCbvlu9DVShDj/QXHgvmc5aZ4fbwQuSqVOKXGIUdznYL3mZ4RFMb4QrhO7jp02OJAnY0UPkPrwLIJ3fc52kmwgOINvdQSTeQu6lOCXos8OS+pP/vUewU6ZMPd2R9leqqRLCfY0nH1MnfZOxvxJqUgixb7lIGq+sK8ciUat2ZEu6qdzgyoWbh32xLtZ8r41vFt9Q9EMogWoqm3GqohVvQTSHZWx7jYIZ+enbHpynp/ifpGF0Rzu9X7do23HluGkvMvDWGxiwHltjk3QJAecQVa5nuPqhQQ0v2EpMFr9AvIrXTgU+kZjmAHOaZssM133ehyIWj/v2ASKeA8gcxuPmAu38uFamZav2a4FD3Ei2Aq3o2y7Gkrr3na0qpITyLiNC85p+jklZ62wgAfTa5bFuze+ryyaZExfhvwAMNEiYfS0qR1y4tuNTfDwIS7Ep0EY0t9F4Jq2orgzXzeUYnp8u1HW0rSTT+4x1z0PaLIUwyVLQSPUGAZeyhEv5YqXcsVLueKlXPFSrny1lLqbieRSFIcdbhju2Vz3D99SDV/q4X9BhkFLIp7EPgAAAABJRU5ErkJggg==" alt="" width="100" height="100">
+
+            <div class="name">
+                SkillHub
+            </div>
+           
+        </div>
+
+        <div class="sidenav-url">
+            <div class="url">
+                <a href="#profile" class="active">Profile</a>
+                <hr align="center">
+            </div>
+            <div class="url">
+                <a href="#settings">Settings</a>
+                <hr align="center">
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
+    <!-- Main -->
+    <br>
+    <br>
+    <br>
+    <div class="main">
+       
+        <div class="card">
+            <div class="card-body">
+                <i class="fa fa-pen fa-xs edit"></i>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>User</span><input type="text" value="ImDezCode"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>User@gmail.com</span><input type="text" value="imdezcode@gmail.com"></td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>Bali, Indonesia</span><input type="text" value="Bali, Indonesia"></td>
+                        </tr>
+                        <tr>
+                            <td>Hobbies</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>Diving, Reading Book</span><input type="text" value="Diving, Reading Book"></td>
+                        </tr>
+                        <tr>
+                            <td>Job</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>Plumber</span><input type="text" value="Web Developer"></td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td>:</td>
+                            <td class="view-mode"><span>9685974681</span><input type="text" value="PHP, HTML, CSS, Java"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="save" style="display:none;">Save</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".edit").on("click", function() {
+                const cardBody = $(this).closest(".card-body");
+                cardBody.find(".view-mode").toggleClass("edit-mode");
+                cardBody.find(".save").toggle();
+            });
+
+            $(".save").on("click", function() {
+                const cardBody = $(this).closest(".card-body");
+                cardBody.find(".view-mode").toggleClass("edit-mode");
+                $(this).toggle();
+                // Perform the save/update logic here (e.g., send data to the server via AJAX).
+            });
+        });
+    </script>
+
+    <!-- End -->
+</body>                
+</html>
