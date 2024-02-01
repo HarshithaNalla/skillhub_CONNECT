@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+
+<div id="searchResultsContainer"></div>
+<div class="col-md-6 animate-box">
+    <h3>Search Jobs</h3>
+        <div class="form-group">
+            <input type="text" id="searchInput" class="form-control" placeholder="Enter your search keyword">
+        </div>
+        <div class="form-group">
+            <button id="searchButton" class="btn btn-primary btn-lg">Search</button>
+        </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const searchResultsContainer = document.getElementById('searchResultsContainer');
+
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            const searchKeyword = searchInput.value.trim();
+            if (searchKeyword) {
+                // Use AJAX to fetch the content of SearchResults.html
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === XMLHttpRequest.DONE) {
+                        if (xhr.status === 200) {
+                            // Inject the fetched content into the searchResultsContainer
+                            searchResultsContainer.innerHTML = xhr.responseText;
+                        } else {
+                            console.error('Failed to fetch search results:', xhr.status);
+                        }
+                    }
+                };
+                xhr.open('GET', 'SearchResults.html', true);
+                xhr.send();
+            } else {
+                // Handle empty search keyword
+                alert('Please enter a search keyword.');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

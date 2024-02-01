@@ -97,6 +97,50 @@
     color: #333;
 }
 
+iframe{
+	height:700px;
+	width:1000px;
+}
+.grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Three columns */
+      gap: 20px; /* Gap between grid items */
+    }
+
+    .grid-item {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+      display: flex;
+      flex-direction: column; /* Align content in a column */
+    }
+
+    .rating-box {
+      margin-top: auto; /* Push the star rating to the bottom of the grid item */
+    }
+
+    /* Star Rating Styles */
+    .rating-box {
+      margin-top: auto;
+    }
+
+    .stars {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stars i {
+      color: #e6e6e6;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .stars i.active {
+      color: #ff9c1a;
+    }
 
 
 	</style>
@@ -171,23 +215,25 @@
 			</div>
 		</div>
 	</header>
-	
 	<div class="gtco-section">
 		<div class="gtco-container">
 			<div class="row row-pb-md">
 				<div class="col-md-6 animate-box">
 					<h3>Search Jobs</h3>
-                        <div class="form-group">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Enter your search keyword">
-                        </div>
-                        <div class="form-group">
-                            <button id="searchButton" class="btn btn-primary btn-lg">Search</button>
-                        </div>
+					<div class="form-group">
+						<input type="text" id="searchInput" class="form-control" placeholder="Enter your search keyword">
+					</div>
+					<div class="form-group">
+						<button id="searchButton" class="btn btn-primary btn-lg" >Search</button>
+					</div>
 				</div>
-				
 			</div>
-			
-			
+		</div>
+		<div class="serviceResult" style="display: none;">
+			<label for="itemCount">Number of Items:</label>
+			<input type="number" id="itemCount" min="0">
+			<button onclick="generateGrid()">Generate Grid</button>
+			<div class="grid-container"></div>
 		</div>
 	</div>
 
@@ -207,37 +253,6 @@
 		</div>
 	</div>
 
-	<div id="gtco-subscribe">
-		<div class="gtco-container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>Subscribe</h2>
-					<p>Be the first to know about the new templates.</p>
-				</div>
-			</div>
-			<div class="row animate-box">
-				<div class="col-md-12">
-					<form class="form-inline">
-						<div class="col-md-4 col-sm-4">
-							<div class="form-group">
-								<label for="email" class="sr-only">Email</label>
-								<input type="email" class="form-control" id="email" placeholder="Your Email">
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4">
-							<div class="form-group">
-								<label for="name" class="sr-only">Name</label>
-								<input type="text" class="form-control" id="name" placeholder="Your Name">
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-4">
-							<button type="submit" class="btn btn-default btn-block">Subscribe</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<footer id="gtco-footer" role="contentinfo">
 		<div class="gtco-container">
@@ -333,7 +348,76 @@
 	<script src="js/magnific-popup-options.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
-
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+		import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+	
+		// Firebase configuration
+		const firebaseConfig = {
+            apiKey: "AIzaSyB0JIU9cOR3IcXjhzsDXh-k5BUV-BQZ54E",
+            authDomain: "skillhub-65c47.firebaseapp.com",
+            projectId: "skillhub-65c47",
+            storageBucket: "skillhub-65c47.appspot.com",
+            messagingSenderId: "715363219170",
+            appId: "1:715363219170:web:a1942ae1d8aee88e1d50bb",
+            measurementId: "G-5MS1FLDER4"
+        };
+	
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const database = getDatabase();
+	
+		let undergraduateProfiles = [];
+	
+		// Function to generate grid
+		
+	
+		// Event listener for form submission
+		const searchButton = document.getElementById('searchButton');
+		searchButton.addEventListener('click', async (e) => {
+			e.preventDefault();
+			try {
+				const searchValue = document.getElementById('searchInput').value;
+				const profilesRef = ref(database, 'profiles');
+				const profilesSnapshot = await get(profilesRef);
+	
+				if (profilesSnapshot.exists()) {
+					const profilesData = profilesSnapshot.val();
+					undergraduateProfiles = Object.values(profilesData);
+					console.log("Profiles with job role '" + searchValue + "':", undergraduateProfiles);
+				} else {
+					console.log("No data found at 'profiles' node.");
+				}
+			} catch (error) {
+				console.error('Error retrieving profiles:', error);
+				// Provide feedback to the user about the error
+			}
+			const container = document.querySelector(".grid-container");
+			container.innerHTML = "";
+			// Iterate through undergraduateProfiles array
+			undergraduateProfiles.forEach(profile => {
+				// Create a grid item element
+				// const gridItem = document.createElement("div");
+				// gridItem.classList.add("grid-item");
+				// // Customize grid item content, assuming profile object has 'name' property
+				// gridItem.textContent = profile.name;
+				// // Append grid item to the container
+				// container.appendChild(gridItem);
+				const griditem=document.createElement('griditem');
+				griditem.textContent=profile.Object;
+				container.appendChild(griditem);
+			});
+		});
+		// function generateGrid() {
+			
+		// }
+		// Function to display service result
+		function showServiceResult() {
+			var serviceResultDiv = document.querySelector('.serviceResult');
+			serviceResultDiv.style.display = 'block';
+		}
+	</script>
+	
 	</body>
 </html>
 

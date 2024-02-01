@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Add Font Awesome 6 styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <style>
+    /* Define the grid layout */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Three columns */
+      gap: 20px; /* Gap between grid items */
+    }
+
+    .grid-item {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+      display: flex;
+      flex-direction: column; /* Align content in a column */
+    }
+
+    .rating-box {
+      margin-top: auto; /* Push the star rating to the bottom of the grid item */
+    }
+
+    /* Star Rating Styles */
+    .rating-box {
+      margin-top: auto;
+    }
+
+    .stars {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .stars i {
+      color: #e6e6e6;
+      font-size: 20px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .stars i.active {
+      color: #ff9c1a;
+    }
+  </style>
+  <title>Grid Example</title>
+</head>
+<body>
+  <label for="itemCount">Number of Items:</label>
+  <input type="number" id="itemCount" min="0">
+  <button onclick="generateGrid()">Generate Grid</button>
+  <div class="grid-container"></div>
+
+  <script>
+    function generateGrid() {
+      const container = document.querySelector(".grid-container");
+      const itemCountInput = document.getElementById("itemCount");
+      const itemCount = parseInt(itemCountInput.value);
+
+      // Clear existing items in the container
+      container.innerHTML = "";
+
+      // Generate and append new grid items with default rating of 3 stars
+      for (let i = 1; i <= itemCount; i++) {
+        const gridItem = document.createElement("div");
+        const name = document.createElement("div");
+        const age = document.createElement("div");
+        const rating = 3; // Default rating
+
+        gridItem.className = "grid-item";
+
+        // Set content for item information
+        name.textContent = `Name: John Doe`; // Replace with actual data
+        age.textContent = `Age: 30`; // Replace with actual data
+
+        // Create and append star rating box
+        const ratingBox = document.createElement("div");
+        ratingBox.className = "rating-box";
+        const stars = document.createElement("div");
+        stars.className = "stars";
+
+        // Add event listener to each star
+        for (let j = 1; j <= 5; j++) {
+          const star = document.createElement("i");
+          star.className = "fas fa-star";
+          star.addEventListener("click", () => handleStarClick(j, stars));
+          // Set default stars to active based on the default rating
+          if (j <= rating) {
+            star.classList.add("active");
+          }
+          stars.appendChild(star);
+        }
+
+        ratingBox.appendChild(stars);
+
+        // Append item information and rating box to the grid item
+        gridItem.appendChild(name);
+        gridItem.appendChild(age);
+        gridItem.appendChild(ratingBox);
+
+        container.appendChild(gridItem);
+      }
+    }
+
+    function handleStarClick(starIndex, starsContainer) {
+      // Handle the star click event here
+      const stars = starsContainer.querySelectorAll("i");
+      stars.forEach((star, index) => {
+        if (index < starIndex) {
+          star.classList.add("active");
+        } else {
+          star.classList.remove("active");
+        }
+      });
+    }
+  </script>
+</body>
+</html>

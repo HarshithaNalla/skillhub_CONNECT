@@ -52,6 +52,8 @@
             // Convert the snapshot to JavaScript object
             const profilesData = profilesSnapshot.val();
 
+            console.log(profilesData);
+
             // Filter the profiles where educationLevel is equal to "undergraduate"
             const undergraduateProfiles = Object.values(profilesData).filter(profile => profile.workExperience === "fresher");
 

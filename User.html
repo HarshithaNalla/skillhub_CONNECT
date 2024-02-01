@@ -231,6 +231,13 @@
                             </div>
                         </div>
 
+						<div class="row form-group">
+							<div class="col-md-12">
+								<label class="sr-only" for="jobRole">jobRole</label>
+								<input type="text" id="jobRole" class="form-control" placeholder="Your Area of Interest">
+							</div>
+							
+						</div>
 
 
                         <div class="row form-group">
@@ -244,6 +251,13 @@
                             </div>
                         </div>
                         
+						<div class="row form-group">
+							<div class="col-md-12">
+								<label class="sr-only" for="dailyWages">Expected Daily Wages</label>
+								<input type="integer" id="dailyWages" class="form-control" placeholder="Your Service Charge">
+							</div>
+							
+						</div>
 
 					
 
@@ -427,7 +441,7 @@
 
 		import { collection, query, where, getDocs } from "firebase/firestore";
 
-1
+
     
         profileForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -437,8 +451,9 @@
             const location = document.getElementById('location').value;
             const gender = document.getElementById('gender').value;
             const educationLevel = document.getElementById('educationLevel').value;
+			const jobRole = document.getElementById('jobRole').value;
             const workExperience = document.getElementById('workExperience').value;
-    
+			const dailyWages = document.getElementById('dailyWages').value;
             try {
                 // Check if the phone number already exists
                 const phoneRef = ref(database, 'profiles');
@@ -465,7 +480,9 @@
                         location: location,
                         gender: gender,
                         educationLevel: educationLevel,
-                        workExperience: workExperience
+						jobRole: jobRole,
+                        workExperience: workExperience,
+						dailyWages:dailyWages
                         // Add other profile data as needed
                     });
     
