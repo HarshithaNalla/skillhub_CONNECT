@@ -117,8 +117,8 @@
 				<div class="col-md-8 col-md-offset-2 text-center">
 					<div class="display-t">
 						<div class="display-tc">
-							<h1 class="animate-box" data-animate-effect="fadeInUp">Build the profile</h1>
-							<h2 class="animate-box" data-animate-effect="fadeInUp">Introduce yourself to the Recruiters</a></h2>
+							<h1 class="animate-box" data-animate-effect="fadeInUp">Engage with Enthusiasts</h1>
+							<h2 class="animate-box" data-animate-effect="fadeInUp">Spread your passion all around.</a></h2>
 						</div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@
 			<div class="row row-pb-md">
 				<div class="col-md-6 animate-box">
 					<h3>Want an Employee?</h3>
-					<form id="profileForm" action="#">
+					<form id="recruiterprofileForm" action="#">
 						<div class="row form-group">
 							<div class="col-md-12">
 								<label class="sr-only" for="name">Name</label>
@@ -184,15 +184,16 @@
                         <div class="row form-group">
                             <div class="col-md-12">
                                 <label class="sr-only" for="workExperience">Work Experience</label>
-                                <select id="workExperience" name="workExperience" class="form-control" required>
-                                    <option value="" disabled selected>Select your Work Experience</option>
-                                    <option value="fresher">Fresher</option>
-                                <option value="experienced">Experienced</option>
-                                </select>
+                                <input type="number" id="workExperience" class="form-control" placeholder="Work Experience in Years" required>
                             </div>
                         </div>
                         
-
+						<div class="row form-group">
+							<div class="col-md-12">
+								<label class="sr-only" for="message">Profile</label>
+								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Write us something about you"></textarea>
+							</div>
+						</div>
 					
 
 						<div class="form-group">
@@ -355,7 +356,7 @@
         const analytics = getAnalytics(app);
         const database = getDatabase();
     
-        const profileForm = document.getElementById('profileForm');
+        const profileForm = document.getElementById('recruiterprofileForm');
     
         profileForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -366,10 +367,11 @@
             const gender = document.getElementById('gender').value;
             const educationLevel = document.getElementById('educationLevel').value;
             const workExperience = document.getElementById('workExperience').value;
+			const recruiterProfile = document.getElementById('message').value;
     
             try {
                 // Check if the phone number already exists
-                const phoneRef = ref(database, 'profiles');
+                const phoneRef = ref(database, 'HiringProfiles');
                 const snapshot = await get(phoneRef);
                 let phoneNumberExists = false;
     
@@ -383,22 +385,23 @@
     
                 if (phoneNumberExists) {
                     // Redirect to JobsPage if phone number already exists
-                    window.location.href = 'JobsPage.html';
+                    window.location.href = 'Profile.html';
                 } else {
                     // Insert profile if phone number does not exist
-                    const userRef = ref(database, 'profiles/' + fullName.replace(/\s/g, '_'));
+                    const userRef = ref(database, 'HiringProfiles/' + fullName.replace(/\s/g, '_'));
                     await set(userRef, {
                         fullName: fullName,
                         phoneNumber: phoneNumber,
                         location: location,
                         gender: gender,
                         educationLevel: educationLevel,
-                        workExperience: workExperience
+                        workExperience: workExperience,
+						recruiterProfile: recruiterProfile
                         // Add other profile data as needed
                     });
     
                     // Redirect to JobsPage after successful profile submission
-                    window.location.href = 'JobsPage.html';
+                    window.location.href = 'Profile.html';
                 }
             } catch (error) {
                 console.error('Error submitting profile:', error);
