@@ -424,6 +424,10 @@
         const database = getDatabase();
     
         const profileForm = document.getElementById('profileForm');
+
+		import { collection, query, where, getDocs } from "firebase/firestore";
+
+1
     
         profileForm.addEventListener('submit', async (e) => {
             e.preventDefault();

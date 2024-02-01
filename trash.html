@@ -1,112 +1,71 @@
-<html>
-    <head>
-        <title></title>
-        <style>
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-body{
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-#algn{
-    height: 92vh;
-    min-height: 500px;
-    display: flex;
-    padding : 0px;
-}
-
-#card{
-    width: 300px;
-    height: 300px;
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px 0 #E7E9EB, 0 6px 20px 0 #E7E9EB;
-    
-}
-
-.text{
-    text-align: center;
-    padding-top: 35px;
-}
-
-.text .name{
-    font-weight: 600;
-    font-size: large;
-    padding: 0;
-    margin: 5px;
-}
-
-.text .title{
-    padding: left;
-    margin: 0;
-    font-size: 15px;
-}
-
-#lower-bg{
-    width: 100%;
-    height: 65%;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Form</title>
+</head>
+<body>
+    <h1>Profile Form</h1>
+    <form id="profileForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required><br>
 
 
-#btn{
-    display: flex;
-    justify-content: center;
-    margin: 15px;
-}
+        <button type="submit">Submit</button>
+    </form>
 
-#btn button{
-    margin: 0 20px;
-    padding: 10px 15px;
-    background-color: #FFE400;
-    border: none;
-    border-radius: 50px;
-    font-weight: 700;
-}
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-analytics.js";
+        import { getDatabase, ref, get, set } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
 
-#btn button:hover{
-    box-shadow: 0 4px 8px 0 #E7E9EB, 0 6px 20px 0 #E7E9EB;
-}
-</style>
-    </head>
-    <body>
-        <div>
-            <div id="algn">
-                <div id="card">
-                    <div id="lower-bg">
-                      <div class="text">
-                        <p class="name">Kitchen Staff</p>
-                        <p class="title">10000-16000/Month</p>
-                        <p class="title">Rebel Foods Pvt.Ltd</p>
-                        <p class="title">Dwarakha Nagar,Visakhapatnam</p>
-                      </div>
-                      <div id="btn">
-                        <button class="msg">9865741258</button>
-                      </div>
-                </div>
-    
-            
-                            </div>
-                        
+        // Your Firebase configuration...
+        const firebaseConfig = {
+            apiKey: "AIzaSyB0JIU9cOR3IcXjhzsDXh-k5BUV-BQZ54E",
+            authDomain: "skillhub-65c47.firebaseapp.com",
+            projectId: "skillhub-65c47",
+            storageBucket: "skillhub-65c47.appspot.com",
+            messagingSenderId: "715363219170",
+            appId: "1:715363219170:web:a1942ae1d8aee88e1d50bb",
+            measurementId: "G-5MS1FLDER4"
+        };
 
-                            <div id="algn">
-                                <div id="card">
-                                    <div id="lower-bg">
-                                      <div class="text">
-                                        <p class="name">Kitchen Staff</p>
-                                        <p class="title">10000-16000/Month</p>
-                                        <p class="title">Rebel Foods Pvt.Ltd</p>
-                                        <p class="title">Dwarakha Nagar,Visakhapatnam</p>
-                                      </div>
-                                      <div id="btn">
-                                        <button class="msg">9865741258</button>
-                                      </div>
-                                </div>
-                    
-                            
-                                            </div>
-        </div>
-        
-                       
-    </body>
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase();
+
+        const profileForm = document.getElementById('profileForm');
+
+        profileForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try {
+        // Get a reference to the 'profiles' node
+        const profilesRef = ref(database, 'profiles');
+
+        // Fetch a snapshot of all data at the 'profiles' node
+        const profilesSnapshot = await get(profilesRef);
+
+        // Check if any data exists
+        if (profilesSnapshot.exists()) {
+            // Convert the snapshot to JavaScript object
+            const profilesData = profilesSnapshot.val();
+
+            // Filter the profiles where educationLevel is equal to "undergraduate"
+            const undergraduateProfiles = Object.values(profilesData).filter(profile => profile.workExperience === "fresher");
+
+            // Log or process the filtered data
+            console.log("Profiles with educationLevel 'undergraduate':", undergraduateProfiles);
+        } else {
+            console.log("No data found at 'profiles' node.");
+        }
+    } catch (error) {
+        console.error('Error retrieving profiles:', error);
+        // Handle errors, display messages, etc.
+    }
+});
+
+    </script>
+</body>
 </html>
