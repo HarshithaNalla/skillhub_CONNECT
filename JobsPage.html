@@ -52,59 +52,109 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<style>
+		.profile-dropdown {
+    position: relative;
+}
 
+.profile-dropdown .dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    list-style: none;
+    padding: 0;
+    display: none;
+	width: 100px;
+}
+
+.profile-dropdown .dropdown.profile-menu li {
+    padding: 10px;
+}
+
+.profile-dropdown .dropdown.profile-menu li:hover {
+    background-color: #f5f5f5;
+}
+
+.profile-dropdown .dropdown.profile-menu a {
+    text-decoration: none;
+    color: #333;
+}
+
+.profile-dropdown.open .dropdown {
+    display: block;
+}
+
+
+.profile-dropdown .dropdown.profile-menu li:hover {
+    background-color: #f5f5f5;
+}
+
+.profile-dropdown .dropdown.profile-menu a {
+    text-decoration: none;
+    color: #333;
+}
+
+
+
+	</style>
 	</head>
 	<body>
 		
 	<div class="gtco-loader"></div>
 	
 	<div id="page">
-	<nav class="gtco-nav" role="navigation">
-		<div class="gtco-container">
-			<div class="row">
-				<div class="col-md-12 text-right gtco-contact">
-					<ul class="">
-						<li><a href="#"><i class="ti-mobile"></i> +1 (0)123 456 7890 </a></li>
-						<li><a href="http://twitter.com/gettemplatesco"><i class="ti-twitter-alt"></i> </a></li>
-						<li><a href="#"><i class="icon-mail2"></i></a></li>
-						<li><a href="#"><i class="ti-facebook"></i></a></li>
-					</ul>
+		<nav class="gtco-nav" role="navigation">
+			<div class="gtco-container">
+				<div class="row">
+					<div>
+						<ul>
+							<li class="profile-dropdown">
+								<a href="#">
+									<i class="ti-user"></i>
+								</a>
+								<ul class="dropdown profile-menu">
+									<li><a href="User.html">Profile</a></li>
+									<li><a href="#">SignOut</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-12 text-right gtco-contact">
+						<ul class="">
+							<li><a href="#"><i class="ti-mobile"></i> +1 (0)123 456 7890 </a></li>
+							<li><a href="http://twitter.com/gettemplatesco"><i class="ti-twitter-alt"></i> </a></li>
+							<li><a href="#"><i class="icon-mail2"></i></a></li>
+							<li><a href="#"><i class="ti-facebook"></i></a></li>
+						</ul>
+					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-4 col-xs-12">
+						<div id="gtco-logo"><a href="index.html">Skill Hub<em>.</em></a></div>
+					</div>
+					<div class="col-xs-8 text-right menu-1">
+						<ul>
+							<li class="active"><a href="index.html">Home</a></li>
+							<li><a href="about.html">About</a></li>
+							<li class="has-dropdown">
+								<a href="services.html">Services</a>
+								<ul class="dropdown">
+									<li><a href="#">Carpentry</a></li>
+									<li><a href="#">Painter</a></li>
+									<li><a href="#">Beautician</a></li>
+									<li><a href="#">Chef</a></li>
+								</ul>
+							</li>
+							<li><a href="contact.html">Contact</a></li>
+						</ul>
+					</div>
+				</div>
+				
 			</div>
-			<div class="row">
-				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">Aesthetic <em>.</em></a></div>
-				</div>
-				<div class="col-xs-8 text-right menu-1">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">Services</a>
-							<ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-						<li class="has-dropdown">
-							<a href="#">Dropdown</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="portfolio.html">Portfolio</a></li>
-						<li class="active"><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-	</nav>
+		</nav>
 
 	<header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner" style="background-image:url(images/img_bg_1.jpg);">
 		<div class="overlay"></div>
@@ -125,76 +175,18 @@
 	<div class="gtco-section">
 		<div class="gtco-container">
 			<div class="row row-pb-md">
-				 <!-- Taskbar -->
-                 <div class="gtco-section">
-                    <div class="gtco-container">
-                        <div class="row row-pb-md">
-                            <div class="col-md-6 animate-box">
-                                <h3>Search Jobs</h3>
-                                <div class="form-group">
-                                    <input type="text" id="searchInput" class="form-control" placeholder="Enter your search keyword">
-                                </div>
-                                <div class="form-group">
-                                    <button id="searchButton" class="btn btn-primary btn-lg">Search</button>
-                                </div>
-                            </div>
+				<div class="col-md-6 animate-box">
+					<h3>Search Jobs</h3>
+                        <div class="form-group">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Enter your search keyword">
                         </div>
-                    </div>
-                </div>
-            
-                <!-- Job Listings -->
-                <div class="gtco-section">
-                    <div class="gtco-container">
-                        <div class="row row-pb-md" id="jobListings">
-                            <!-- Job listings will be displayed here after searching -->
+                        <div class="form-group">
+                            <button id="searchButton" class="btn btn-primary btn-lg">Search</button>
                         </div>
-                    </div>
-                </div>
-            
-                <script>
-                    document.getElementById('searchButton').addEventListener('click', function() {
-                        // Get the search keyword
-                        var keyword = document.getElementById('searchInput').value.trim().toLowerCase();
-                        
-                        // Get all job cards
-                        var jobCards = document.querySelectorAll('.job-card');
-            
-                        // Filter job cards based on the keyword
-                        jobCards.forEach(function(card) {
-                            var name = card.querySelector('.name').innerText.trim().toLowerCase();
-                            var title = card.querySelector('.title').innerText.trim().toLowerCase();
-                            var phone = card.querySelector('.msg').innerText.trim();
-            
-                            if (name.includes(keyword) || title.includes(keyword) || phone.includes(keyword)) {
-                                card.style.display = 'block'; // Show matching job card
-                            } else {
-                                card.style.display = 'none'; // Hide non-matching job card
-                            }
-                        });
-                    });
-                </script>
-            
-                <!-- Sample Job Card Template -->
-                <div class="job-card" style="display: none;">
-                    <div class="col-md-5 col-md-push-1 animate-box">
-                        <div id="card">
-                            <div id="lower-bg">
-                                <div class="text">
-                                    <p class="name">Kitchen Staff</p>
-                                    <p class="title">10000-16000/Month</p>
-                                    <p class="title">Rebel Foods Pvt.Ltd</p>
-                                    <p class="title">Dwarakha Nagar,Visakhapatnam</p>
-                                </div>
-                                <div id="btn">
-                                    <button class="msg">9865741258</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				</div>
 				
 			</div>
-			</div>
+			
 			
 		</div>
 	</div>
@@ -233,12 +225,12 @@
 
 	<footer id="gtco-footer" role="contentinfo">
 		<div class="gtco-container">
-			<div class="row row-pb-md">
+			<div class="row row-p	b-md">
 
 				<div class="col-md-4">
 					<div class="gtco-widget">
 						<h3>About Us</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore eos molestias quod sint ipsum possimus temporibus officia iste perspiciatis consectetur in fugiat repudiandae cum. Totam cupiditate nostrum ut neque ab?</p>
+						<p>Providing the Necessary job, work, and service is our main goal.</p>
 					</div>
 				</div>
 
@@ -246,8 +238,6 @@
 					<div class="gtco-widget">
 						<h3>Links</h3>
 						<ul class="gtco-footer-links">
-							<li><a href="#">Knowledge Base</a></li>
-							<li><a href="#">Career</a></li>
 							<li><a href="#">Press</a></li>
 							<li><a href="#">Terms of services</a></li>
 							<li><a href="#">Privacy Policy</a></li>
@@ -271,8 +261,8 @@
 			<div class="row copyright">
 				<div class="col-md-12">
 					<p class="pull-left">
-						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
-						<small class="block">Designed by <a href="http://gettemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
+						<small class="block">&copy; 2024 Skill hub.</small> 
+						<small class="block"><a href="http://gettemplates.co/" target="_blank"></a> Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
 					</p>
 					<p class="pull-right">
 						<ul class="gtco-social-icons pull-right">
@@ -292,7 +282,24 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-	
+	<script>
+		document.addEventListener("DOMContentLoaded", function() {
+    var profileDropdown = document.querySelector('.profile-dropdown');
+
+    profileDropdown.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent the event from bubbling up to the document level
+        this.classList.toggle('open'); // Toggle the 'open' class on click
+    });
+
+    // Close the dropdown when clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (!profileDropdown.contains(event.target)) {
+            profileDropdown.classList.remove('open');
+        }
+    });
+});
+
+	</script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
