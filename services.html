@@ -233,8 +233,9 @@ iframe{
 			<label for="itemCount">Number of Items:</label>
 			<input type="number" id="itemCount" min="0">
 			<button onclick="generateGrid()">Generate Grid</button>
-			<div class="grid-container"></div>
+			<div class="grid-container" ></div>
 		</div>
+		<div class="grid-container" id="grid-container" style="display:none"></div>
 	</div>
 
 
@@ -349,11 +350,11 @@ iframe{
 	<!-- Main -->
 	<script src="js/main.js"></script>
 	<script type="module">
-		import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
-		import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
-	
-		// Firebase configuration
-		const firebaseConfig = {
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-database.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
             apiKey: "AIzaSyB0JIU9cOR3IcXjhzsDXh-k5BUV-BQZ54E",
             authDomain: "skillhub-65c47.firebaseapp.com",
             projectId: "skillhub-65c47",
@@ -362,61 +363,63 @@ iframe{
             appId: "1:715363219170:web:a1942ae1d8aee88e1d50bb",
             measurementId: "G-5MS1FLDER4"
         };
-	
-		// Initialize Firebase
-		const app = initializeApp(firebaseConfig);
-		const database = getDatabase();
-	
-		let undergraduateProfiles = [];
-	
-		// Function to generate grid
-		
-	
-		// Event listener for form submission
-		const searchButton = document.getElementById('searchButton');
-		searchButton.addEventListener('click', async (e) => {
-			e.preventDefault();
-			try {
-				const searchValue = document.getElementById('searchInput').value;
-				const profilesRef = ref(database, 'profiles');
-				const profilesSnapshot = await get(profilesRef);
-	
-				if (profilesSnapshot.exists()) {
-					const profilesData = profilesSnapshot.val();
-					undergraduateProfiles = Object.values(profilesData);
-					console.log("Profiles with job role '" + searchValue + "':", undergraduateProfiles);
-				} else {
-					console.log("No data found at 'profiles' node.");
-				}
-			} catch (error) {
-				console.error('Error retrieving profiles:', error);
-				// Provide feedback to the user about the error
-			}
-			const container = document.querySelector(".grid-container");
-			container.innerHTML = "";
-			// Iterate through undergraduateProfiles array
-			undergraduateProfiles.forEach(profile => {
-				// Create a grid item element
-				// const gridItem = document.createElement("div");
-				// gridItem.classList.add("grid-item");
-				// // Customize grid item content, assuming profile object has 'name' property
-				// gridItem.textContent = profile.name;
-				// // Append grid item to the container
-				// container.appendChild(gridItem);
-				const griditem=document.createElement('griditem');
-				griditem.textContent=profile.Object;
-				container.appendChild(griditem);
-			});
-		});
-		// function generateGrid() {
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase();
+
+        let undergraduateProfiles = [];
+
+        // Event listener for form submission
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+try {
+    const searchValue = document.getElementById('searchInput').value;
+    const profilesRef = ref(database, 'profiles');
+    const profilesSnapshot = await get(profilesRef);
+
+    if (profilesSnapshot.exists()) {
+        const profilesData = profilesSnapshot.val();
+        undergraduateProfiles = Object.values(profilesData).filter(profile => {
+            // Filter profiles based on the search value (case-insensitive)
+            return profile.educationLevel.toLowerCase() === searchValue.toLowerCase();
+        });
+    } else {
+        console.log("No data found at 'profiles' node.");
+    }
+} catch (error) {
+    console.error('Error retrieving profiles:', error);
+    // Provide feedback to the user about the error
+}
+
+
+            const container = document.getElementById("grid-container");
+            container.innerHTML = "";
+            
+            // Iterate through undergraduateProfiles array
+            undergraduateProfiles.forEach(profile => {
+                const gridItem = document.createElement("div");
+                gridItem.classList.add("grid-item");
+                
+                // Customize grid item content based on your profile structure
+                gridItem.innerHTML = `
+                    <p><strong>Name:</strong> ${profile.fullName}</p>
+                    <p><strong>Education Level:</strong> ${profile.educationLevel}</p>
+                    <p><strong>Gender:</strong> ${profile.gender}</p>
+                    <p><strong>Location:</strong> ${profile.location}</p>
+                    <p><strong>Phone Number:</strong> ${profile.phoneNumber}</p>
+                    <p><strong>Rating:</strong> ${profile.rating}</p>
+                    <p><strong>Work Experience:</strong> ${profile.workExperience}</p>
+                `;
+                
+                // Append grid item to the container
+                container.appendChild(gridItem); });
+				
 			
-		// }
-		// Function to display service result
-		function showServiceResult() {
-			var serviceResultDiv = document.querySelector('.serviceResult');
-			serviceResultDiv.style.display = 'block';
-		}
-	</script>
+            container.style.display = 'grid';
+        });
+    </script>
 	
 	</body>
 </html>
